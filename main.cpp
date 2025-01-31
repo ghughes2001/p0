@@ -11,6 +11,8 @@ Main.cpp:
 #include <cstdlib> // exit()
 #include <fstream> // file handling
 #include <string>
+#include <sstream> // istringstream
+#include <ctype.h> // isalnum
 
 using namespace std;
 
@@ -21,11 +23,31 @@ bool isFileEmpty(const std::string& filename) {
     return file.peek() == std::ifstream::traits_type::eof();
 }
 
+// checking if character in string is valid
+//! “ # $ % & ‘ ( ) * + // these characters correspond to ascii numbers 33 to 43
+bool stringCharacterCheck(string str)
+{
+    for (int i = 0; i < str.length(); i++)
+    {
+        char c = i;
+
+        if (c > 33 || c < 43)
+        {
+            return true;
+        }
+        if (isalnum(c))
+            {
+                return true;
+            }
+    }
+    return false;
+}
+
 int main(int argc, char* argv[])
 {
     // checking if there is more than 1 filename present
     // And printing erro message if so (must be only 1 file)
-    if (argc == 3)
+    if (argc >= 3)
     {
         cout << "Fatal: Imroper Usuage" << endl;
         cout << "Usuage: P0 [filename]" << endl;
@@ -40,8 +62,10 @@ int main(int argc, char* argv[])
         // variables
         string file = argv[1];
         string line;
+        string chr;
         ifstream myFile(file);
 
+        // checking if there is contentents in file
         if (isFileEmpty(file))
         {
             cout << "Error: Missing data" << endl;
@@ -51,22 +75,32 @@ int main(int argc, char* argv[])
         // checking file is readable
         // Check that input data are all character strings with letters, numbers,
         // And/or any of the following special characters:
-        //! “ # $ % & ‘ ( ) * + // these characters correspond to ascii numbers 33 to 43
         //Assume the strings are separated with any number of standard
         //white-space separators (space, tab, newline).
         if (myFile.is_open())
         {
             while (getline(myFile, line))
             {
-                cout << line << endl;   
+                // accessing each string that is seperated by white-space separators
+                istringstream strDiv(line);
+
+                while (strDiv >> chr)
+                {
+                    if (stringCharacterCheck)
+                    {
+                        cout << chr << endl;
+                    }
+                    cout << "Error: Invalid character" << endl;
+                    exit(1);
+                }
             }
+            myFile.close();
         }
         else
         {
             cout << file << " couldn't open" << endl;
             return 1;
         }
-        myFile.close();
     }
     return 0;
 }
