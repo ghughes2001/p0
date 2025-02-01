@@ -29,18 +29,19 @@ bool stringCharacterCheck(string str)
 {
     for (int i = 0; i < str.length(); i++)
     {
-        char c = i;
+        char c = str[i];
 
-        if (c > 33 || c < 43)
-        {
-            return true;
-        }
         if (isalnum(c))
-            {
-                return true;
-            }
+            continue;
+        if (c == '!' || c == '"' || c == '#' || c == '$' || c == '%' || c == '&' 
+            || c == '\'' || c == '(' || c == ')' || c == '*' || c == '+')
+            continue;
+        if (isspace(c))
+            continue;
+        
+        return false;
     }
-    return false;
+    return true;
 }
 
 int main(int argc, char* argv[])
@@ -63,7 +64,6 @@ int main(int argc, char* argv[])
         string file = argv[1];
         string line;
         string chr;
-        ifstream myFile(file);
 
         // checking if there is contentents in file
         if (isFileEmpty(file))
@@ -77,6 +77,8 @@ int main(int argc, char* argv[])
         // And/or any of the following special characters:
         //Assume the strings are separated with any number of standard
         //white-space separators (space, tab, newline).
+        ifstream myFile(file);
+
         if (myFile.is_open())
         {
             while (getline(myFile, line))
@@ -86,11 +88,11 @@ int main(int argc, char* argv[])
 
                 while (strDiv >> chr)
                 {
-                    if (stringCharacterCheck)
+                    if (stringCharacterCheck(chr))
                     {
                         cout << chr << endl;
                     }
-                    cout << "Error: Invalid character" << endl;
+                    cout << "Error: Invalid character " << chr << endl;
                     exit(1);
                 }
             }
@@ -99,7 +101,7 @@ int main(int argc, char* argv[])
         else
         {
             cout << file << " couldn't open" << endl;
-            return 1;
+            exit(1);
         }
     }
     return 0;
