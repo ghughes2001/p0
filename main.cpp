@@ -39,9 +39,9 @@ bool stringCharacterCheck(string str)
         if (isspace(c))
             continue;
         
-        return false;
+        return false; //invalid
     }
-    return true;
+    return true; // valid
 }
 
 int main(int argc, char* argv[])
@@ -63,7 +63,7 @@ int main(int argc, char* argv[])
         // variables
         string file = argv[1];
         string line;
-        string chr;
+        string word;
 
         // checking if there is contentents in file
         if (isFileEmpty(file))
@@ -86,14 +86,17 @@ int main(int argc, char* argv[])
                 // accessing each string that is seperated by white-space separators
                 istringstream strDiv(line);
 
-                while (strDiv >> chr)
+                while (strDiv >> word)
                 {
-                    if (stringCharacterCheck(chr))
+                    if (stringCharacterCheck(word))
                     {
-                        cout << chr << endl;
+                        cout << word << endl;
                     }
-                    cout << "Error: Invalid character " << chr << endl;
-                    exit(1);
+                    else 
+                    {
+                        cout << "Error: Invalid character or word" << word << endl;
+                        exit(1);
+                    }
                 }
             }
             myFile.close();
@@ -103,6 +106,46 @@ int main(int argc, char* argv[])
             cout << file << " couldn't open" << endl;
             exit(1);
         }
+    }
+    if (argc == 1)
+    {
+        // variables for user input
+        string inputLine;
+        string word;
+        ofstream writeFile("output.txt", ios::app);
+
+        if (!writeFile.is_open())
+        {
+            cout << "Error: Could not open file for writing" << endl;
+            exit(1);
+        }
+
+        while (getline(cin, inputLine))
+        {
+            if (inputLine.empty())
+                continue;
+            
+            istringstream strDiv(inputLine);
+            
+            while (strDiv >> word)
+            {
+                if (!stringCharacterCheck(word))
+                {
+                    cout << "Error: Invalid character or word " << endl;
+                    exit(1);
+                }
+                else 
+                {
+                    writeFile << word << endl;
+                    // then send to binary tree class
+                }
+            }
+        }
+        writeFile.close();
+        
+        // erasing contents of file so the next tree dosn't have it
+        ofstream fileToClear("output.txt", ios::out | ios::trunc);
+        fileToClear.close();
     }
     return 0;
 }
