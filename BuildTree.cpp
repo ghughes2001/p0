@@ -5,15 +5,16 @@ Program that builds the binary tree
 */
 
 #include <iostream>
-#include <BinaryNode.hpp>
-#include <BuildTree.hpp>
+#include "BinaryNode.hpp"
+#include "BuildTree.hpp"
 #include <string>
 #include <sstream>
 #include <cctype>
 
 using namespace std;
 
-node_t* buildTree(ifstream& file)
+// function to take in file
+node_t* BuildTree::buildTree(ifstream& file)
 {
     // variables
     node_t* root = nullptr;
@@ -37,7 +38,7 @@ node_t* buildTree(ifstream& file)
 }
 
 // function that inseerts a node depeing on string size
-void insert(node_t *node, const string str, int strLength)
+void BuildTree::insert(node_t *node, const string str, int strLength)
 {
     if (node == nullptr)
     {

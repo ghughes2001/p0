@@ -13,6 +13,8 @@ Main.cpp:
 #include <string>
 #include <sstream> // istringstream
 #include <ctype.h> // isalnum
+#include "BinaryNode.hpp"
+#include "BuildTree.hpp"
 
 using namespace std;
 
@@ -88,17 +90,15 @@ int main(int argc, char* argv[])
 
                 while (strDiv >> word)
                 {
-                    if (stringCharacterCheck(word))
+                    if (!stringCharacterCheck(word))
                     {
-                        cout << word << endl;
-                    }
-                    else 
-                    {
-                        cout << "Error: Invalid character or word" << word << endl;
-                        exit(1);
+                       cout << "Error: Invalid character or word" << word << endl;
+                        exit(1); 
                     }
                 }
             }
+            // validated file gets sending file to BuidlTree
+            node_t *root = buildTree(myFile);
             myFile.close();
         }
         else
@@ -137,10 +137,11 @@ int main(int argc, char* argv[])
                 else 
                 {
                     writeFile << word << endl;
-                    // then send to binary tree class
                 }
             }
         }
+        // then send to binary tree class
+        node_t *root = buildTree("output.txt");
         writeFile.close();
         
         // erasing contents of file so the next tree dosn't have it
