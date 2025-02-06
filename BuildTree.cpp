@@ -46,15 +46,15 @@ node_t* BuildTree::insert(node_t *node, const string str, int strLength)
     }
     if (strLength < node->_charInString)
     {
-        insert(node->_left, str, strLength);
+        insert(node->_left, str, strLength); // insert on left side
     }
     if (strLength > node->_charInString)
     {
-        insert(node->_right, str, strLength);
+        insert(node->_right, str, strLength); // insert on right side
     }
     if (strLength == node->_charInString)
     {
-        node->strings.push_back(str);
+        node->strings.push_back(str); // insert same string size
     }
     return node;
 }
