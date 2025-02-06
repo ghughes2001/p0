@@ -98,7 +98,8 @@ int main(int argc, char* argv[])
                 }
             }
             // validated file gets sending file to BuidlTree
-            node_t *root = buildTree(myFile);
+            BuildTree tree;
+            node_t *root = tree.buildTree(myFile); // creating tree
             myFile.close();
         }
         else
@@ -140,10 +141,19 @@ int main(int argc, char* argv[])
                 }
             }
         }
-        // then send to binary tree class
-        node_t *root = buildTree("output.txt");
         writeFile.close();
-        
+
+        // then send to binary tree class
+        ifstream userFile("output.txt");
+        if (!userFile.is_open())
+        {
+            cout << "Error: User file not opened" << endl;
+            exit(1);
+        }
+        BuildTree tree;
+        node_t *root = tree.buildTree(userFile); // creating tree
+        userFile.close();
+
         // erasing contents of file so the next tree dosn't have it
         ofstream fileToClear("output.txt", ios::out | ios::trunc);
         fileToClear.close();

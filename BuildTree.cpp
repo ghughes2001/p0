@@ -33,12 +33,11 @@ node_t* BuildTree::buildTree(ifstream& file)
             insert(root, word, length);
         }
     }
-
-
+    return root;
 }
 
 // function that inseerts a node depeing on string size
-void BuildTree::insert(node_t *node, const string str, int strLength)
+node_t* BuildTree::insert(node_t *node, const string str, int strLength)
 {
     if (node == nullptr)
     {
@@ -57,4 +56,7 @@ void BuildTree::insert(node_t *node, const string str, int strLength)
     {
         node->strings.push_back(str);
     }
+    return node;
 }
+
+

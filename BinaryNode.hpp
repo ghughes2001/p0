@@ -12,7 +12,7 @@ Program that builds the nodes for the tree
 
 class node_t
 {
-    public:
+    public: // accessible to other files
         node_t *_left;
         node_t *_right;
         int _charInString;

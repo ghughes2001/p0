@@ -13,8 +13,9 @@ Program that builds the binary tree class
 
 class BuildTree
 {
-    node_t* buildTree(ifstream& file);
-    void insert(node_t *node, const std::string str, int strLength); //function to insert strings into tree
+    public: // accessible to other files
+        node_t* buildTree(std::ifstream& file);
+        node_t* insert(node_t *node, const std::string str, int strLength); //function to insert strings into tree
 };
 
 #endif
