@@ -9,6 +9,7 @@ Program that traverses the binary tree
 #include "BuildTree.hpp"
 #include "Traversals.hpp"
 #include <stack>
+#include <queue>
 
 using namespace std;
 
