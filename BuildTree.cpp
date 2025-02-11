@@ -58,5 +58,3 @@ node_t* BuildTree::insert(node_t *node, const string str, int strLength)
     }
     return node;
 }
-
-

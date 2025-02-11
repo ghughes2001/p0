@@ -15,6 +15,7 @@ Main.cpp:
 #include <ctype.h> // isalnum
 #include "BinaryNode.hpp"
 #include "BuildTree.hpp"
+#include "Traversals.hpp"
 
 using namespace std;
 
@@ -101,6 +102,15 @@ int main(int argc, char* argv[])
             BuildTree tree;
             node_t *root = tree.buildTree(myFile); // creating tree
             myFile.close();
+
+            // printing traversals
+            Traversals treeTraversing;
+            cout << "Level Order: " << endl;
+            treeTraversing.traverseLevelOrder(root);
+            cout << "Post-Order: " << endl;
+            treeTraversing.traversePostOrder(root);
+            cout << "Pre-Order: " << endl;
+            treeTraversing.traversePreOrder(root);
         }
         else
         {
@@ -153,6 +163,15 @@ int main(int argc, char* argv[])
         BuildTree tree;
         node_t *root = tree.buildTree(userFile); // creating tree
         userFile.close();
+
+        // printing traversals
+        Traversals treeTraversing;
+        cout << "Level Order: " << endl;
+        treeTraversing.traverseLevelOrder(root);
+        cout << "Post-Order: " << endl;
+        treeTraversing.traversePostOrder(root);
+        cout << "Pre-Order: " << endl;
+        treeTraversing.traversePreOrder(root);
 
         // erasing contents of file so the next tree dosn't have it
         ofstream fileToClear("output.txt", ios::out | ios::trunc);

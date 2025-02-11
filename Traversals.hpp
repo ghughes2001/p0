@@ -1,7 +1,7 @@
 /*
 Author: Grant Hughes
 Created: Febuary 3rd, 2025
-Program that builds the nodes for the tree
+Header file for traversing the tree
 */
 
 #ifndef _TRAVERSALS_H_
@@ -13,9 +13,9 @@ Program that builds the nodes for the tree
 class Traversals
 {
     public:
-        void traverseLevelOrder(node_t *node, const char[]); 
-        void traversePreOrder(node_t *node, const char[]);
-        void traversePostOrder(node_t *node, const char[]);
+        void traverseLevelOrder(node_t *node); 
+        void traversePreOrder(node_t *node);
+        void traversePostOrder(node_t *node);
 };
 
 #endif
