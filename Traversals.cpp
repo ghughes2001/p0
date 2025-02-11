@@ -76,6 +76,8 @@ void Traversals::traversePreOrder(node_t *node)
 
 void Traversals::traversePostOrder(node_t *node)
 {
+    cout << "staring.." << endl;
+
     // variables
     stack<node_t*> preOrderStack;
     stack<node_t*>  postOrderStack;

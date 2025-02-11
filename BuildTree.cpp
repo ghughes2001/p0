@@ -30,31 +30,40 @@ node_t* BuildTree::buildTree(ifstream& file)
         while (seperatedLine >> word)
         {
             int length = word.length(); // using length of strings to measure node placement in tree
-            insert(root, word, length);
+            root = insert(root, word, length);
         }
+    }
+    if (root == nullptr) {
+        cout << "Tree is empty!" << endl;
+    } else {
+        cout << "Tree built successfully!" << endl;
     }
     return root;
 }
 
-// function that inseerts a node depeing on string size
-node_t* BuildTree::insert(node_t *node, const string str, int strLength)
+node_t* BuildTree::insert(node_t* node, const string str, int strLength)
 {
     if (node == nullptr)
     {
-        node = new node_t(strLength);
-        node->strings.push_back(str);
+        node = new node_t(strLength); // create a new node
+        node->strings.push_back(str); // add string to the node
+        return node; // return the new node to update the parent node's pointer
     }
+
+    // If the current node's string length is greater, insert to the left
     if (strLength < node->_charInString)
     {
-        insert(node->_left, str, strLength); // insert on left side
+        node->_left = insert(node->_left, str, strLength); // recurse on left subtree
     }
-    if (strLength > node->_charInString)
+    // If the current node's string length is less, insert to the right
+    else if (strLength > node->_charInString)
     {
-        insert(node->_right, str, strLength); // insert on right side
+        node->_right = insert(node->_right, str, strLength); // recurse on right subtree
     }
-    if (strLength == node->_charInString)
+    // If the current node's string length is equal, add the string to this node
+    else
     {
-        node->strings.push_back(str); // insert same string size
+        node->strings.push_back(str);
     }
-    return node;
+    return node; // return the node to its parent
 }

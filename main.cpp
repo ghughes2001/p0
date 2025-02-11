@@ -93,11 +93,14 @@ int main(int argc, char* argv[])
                 {
                     if (!stringCharacterCheck(word))
                     {
-                       cout << "Error: Invalid character or word" << word << endl;
+                       cout << "Error: Invalid character or word " << endl;
                         exit(1); 
                     }
                 }
             }
+            myFile.clear(); // Clear any EOF flag after reading the file
+            myFile.seekg(0, ios::beg); // Go back to the beginning of the file
+
             // validated file gets sending file to BuidlTree
             BuildTree tree;
             node_t *root = tree.buildTree(myFile); // creating tree
