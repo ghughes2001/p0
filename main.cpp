@@ -30,7 +30,7 @@ bool isFileEmpty(const std::string& filename) {
 //! “ # $ % & ‘ ( ) * + // these characters correspond to ascii numbers 33 to 43
 bool stringCharacterCheck(string str)
 {
-    for (int i = 0; i < str.length(); i++)
+    for (size_t i = 0; i < str.length(); i++)
     {
         char c = str[i];
 
